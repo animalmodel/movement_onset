@@ -6,6 +6,9 @@ clear all
 close all
 clc
 
+programName = 'movement_onset_detection_2nd';
+ver = '1.1.1';
+
 %% Initialization
 
 screenSize = get(0,'ScreenSize');
