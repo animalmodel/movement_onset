@@ -6,7 +6,10 @@ clear all
 close all
 clc
 
-%% Initialization1170
+programName = 'movement_onset_detection_1st';
+ver = '1.1';
+
+%% Initialization
 
 likeliTh = 0.8;
 visibleTh = 0.7;
