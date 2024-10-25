@@ -1,13 +1,10 @@
 % movement_onset_detection_2nd.m
 % Programmed by Akito Kosugi
-% ver 1.1.1    05.01.2024
+% ver 1.2    10.25.2024
 
 clear all
 close all
 clc
-
-programName = 'movement_onset_detection_2nd';
-ver = '1.1.1';
 
 %% Initialization
 
@@ -17,7 +14,32 @@ screenSize = get(0,'ScreenSize');
 %% Data loading
 
 %---Load mat file---%
-[loadData, folderName, dataName, dataNum] = folderLoading;
+currentfolder = pwd;
+dpath = uigetdir;
+   
+%     folderNameStart = max(findstr(dpath,'/'));
+folderNameStart = max(findstr(dpath,'\'));
+folderNameEnd = length(dpath);
+folderName = dpath(folderNameStart+1:folderNameEnd);
+
+cd(dpath)
+D = dir('*.mat');
+fileNum = size(D,1);
+h = waitbar(0,'file loading...');
+for n=1:fileNum
+
+    fname = D(n).name;
+    fileName(n) = {fname};
+    load(fname)
+    temp =  eval(char(who('-file', fname)));
+    readData(n) = temp;
+    clear temp
+    waitbar(n/fileNum,h);
+end
+close(h)
+
+cd(currentfolder)
+disp('File Loading complete');
 
 fps = loadData(1).param.fps;
 partsName = loadData(1).param.partsName;
