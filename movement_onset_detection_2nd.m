@@ -21,20 +21,18 @@ dpath = uigetdir;
 folderNameStart = max(findstr(dpath,'\'));
 folderNameEnd = length(dpath);
 folderName = dpath(folderNameStart+1:folderNameEnd);
-
 cd(dpath)
 D = dir('*.mat');
-fileNum = size(D,1);
+dataNum = size(D,1);
 h = waitbar(0,'file loading...');
-for n=1:fileNum
-
+for n=1:dataNum
     fname = D(n).name;
-    fileName(n) = {fname};
+    dataName(n) = {fname};
     load(fname)
     temp =  eval(char(who('-file', fname)));
-    readData(n) = temp;
+    loadData(n) = temp;
     clear temp
-    waitbar(n/fileNum,h);
+    waitbar(n/dataNum,h);
 end
 close(h)
 
