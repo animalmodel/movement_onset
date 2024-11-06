@@ -1,6 +1,6 @@
 % movement_onset_detection_2nd.m
 % Programmed by Akito Kosugi
-% ver 1.2    10.25.2024
+% ver 1.2.1    11.06.2024
 
 clear all
 close all
@@ -35,6 +35,7 @@ for n=1:dataNum
     waitbar(n/dataNum,h);
 end
 close(h)
+clear saveData
 
 cd(currentfolder)
 disp('File Loading complete');
@@ -115,7 +116,7 @@ title('Vertical position');
 xlabel('Time from onset [ms]');
 ylabel('Position (px)');
 xlim([-100,400]);
-ylim([0,350]);
+ylim([0,400]);
 set(gca,'fontsize',fSize);
 subplot(2,6,5)
 hold on
@@ -159,6 +160,7 @@ saveData.param.fps = fps;
 saveData.param.condition = condition;
 saveData.param.partsName = partsName;
 
+saveData.data.fileName = dataName;
 saveData.data.trial = trial;
 saveData.data.triggerIdx = triggerIdx;
 saveData.data.onsetIdx = onsetIdx;
